@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 20170412075925) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "devices", force: :cascade do |t|
     t.string   "device_token"
     t.string   "device_type"
@@ -47,7 +50,7 @@ ActiveRecord::Schema.define(version: 20170412075925) do
     t.datetime "expires_at"
     t.string   "f_name"
     t.string   "l_name"
-    t.         "email"
+    t.string   "email"
     t.float    "distance",     default: 20.0
     t.boolean  "notification", default: true
   end

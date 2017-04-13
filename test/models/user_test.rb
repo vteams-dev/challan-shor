@@ -12,9 +12,9 @@
 #  expires_at   :datetime
 #  f_name       :string
 #  l_name       :string
-#  email        :
+#  email        :string
 #  distance     :float            default("20.0")
-#  notification :boolean          default("t")
+#  notification :boolean          default("true")
 #
 
 require 'test_helper'
