@@ -9,6 +9,7 @@ if @user
       json.last_name @user.l_name
       json.email @user.email
       json.distance @user.distance
+      json.notification @user.notification
     end
   elsif @user.expired?
     json.success "false"

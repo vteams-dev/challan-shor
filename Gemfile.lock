@@ -41,6 +41,9 @@ GEM
     annotate (2.6.5)
       activerecord (>= 2.3.0)
       rake (>= 0.8.7)
+    apipie-rails (0.4.0)
+      json
+      rails (>= 4.0)
     arel (7.1.4)
     builder (3.2.3)
     byebug (9.0.6)
@@ -170,6 +173,7 @@ PLATFORMS
 
 DEPENDENCIES
   annotate
+  apipie-rails
   byebug
   capistrano (~> 3.4.0)
   capistrano-bundler (~> 1.1.3)

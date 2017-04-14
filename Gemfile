@@ -16,7 +16,6 @@ gem 'geocoder'
 gem 'pushmeup'
 gem 'fcm'
 # gem 'rpush'
-# gem 'apipie-rails'
 
 group :development, :test do
   gem 'byebug', platform: :mri
@@ -29,6 +28,7 @@ group :development do
 
   gem 'pry-rails'
   gem 'annotate'
+  gem 'apipie-rails'
 
   gem 'capistrano', '~> 3.4.0'
   gem 'capistrano-rails', '~> 1.1.2'

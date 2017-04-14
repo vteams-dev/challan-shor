@@ -1,4 +1,10 @@
 class UserLocationsController < ApplicationController
+
+  api :POST, '/user_locations', 'Update user location'
+  param :latitude, Float, desc: 'User current location latitude', required: true
+  param :longitude, Float, desc: 'User current location longitude', required: true
+  param :user_id, Integer, desc: 'User id, whose current location is marked', required: true
+
   def create
     @location = UserLocation.new(latitude: params[:latitude], longitude: params[:longitude], user_id: params[:user_id])
     if @location.save

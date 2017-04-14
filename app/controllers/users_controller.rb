@@ -1,4 +1,8 @@
 class UsersController < ApplicationController
+
+  api :POST, '/users', 'Register User'
+  param :phone_number, String, desc: 'User phone number to register with', required: true
+
   def create
     if params[:phone_number].present?
       phone_number = params[:phone_number].sub(/^./, '+92')
@@ -7,6 +11,11 @@ class UsersController < ApplicationController
       @user.send_pin
     end
   end
+
+  api :POST, '/users/verify', 'Verify user through pin code'
+  param :uuid, String, desc: 'User uuid sent in response to success registration', required: true
+  param :pin, Integer, desc: 'User pin sent to user mobile while registration', required: true
+
   def verify
     @user = User.find_by(uuid: params[:uuid])
     # @user.notification = if (params[:notification].present? ? params[:notification] : true)
@@ -19,6 +28,15 @@ class UsersController < ApplicationController
       end
     end
   end
+
+  api :POST, '/users/update', 'Update user settings'
+  param :f_name, String, desc: 'User first name'
+  param :l_name, String, desc: 'User last name'
+  param :email, String, desc: 'User email'
+  param :notification, [true, false], desc: 'User will either receive notification or not (Boolean Value)'
+  param :user_id, Integer, desc: 'User id whose settings are going to change', required: true
+  param :distance, Float, desc: 'Distance in miles, how far specific user will receive notification of challan point. By default set to 20 when user register'
+
   def update_user
     @user = User.find(params[:user_id])
     if @user.update(user_params)
@@ -27,6 +45,7 @@ class UsersController < ApplicationController
       @update = false
     end
   end
+
   private
   def user_params
     params.permit(:f_name, :l_name, :email, :distance, :notification)

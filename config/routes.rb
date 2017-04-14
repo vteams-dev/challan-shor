@@ -8,12 +8,10 @@
 #
 
 Rails.application.routes.draw do
-  # apipie
+  apipie
   resources :users, only: [:create]
   post 'users/verify' => "users#verify"
   post 'users/update' => "users#update_user", as: :update_user
-  # post 'users/add_device_token' => "users#add_device_token", as: :add_token
-  # post 'users/update_device_token' => "users#update_device_token", as: :update_token
   resources :user_locations, only: [:create]
   resources :mark_dangers, only: [:create]
 end
