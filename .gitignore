@@ -20,8 +20,6 @@
 /.idea
 .idea/workspace.xml
 /.idea*
-
->>>>>>> gitignore update
 # Ignore Byebug command history file.
 .byebug_history
 
