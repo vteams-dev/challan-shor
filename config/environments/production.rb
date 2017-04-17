@@ -10,6 +10,7 @@ Rails.application.configure do
   config.i18n.fallbacks = true
   config.active_support.deprecation = :notify
   config.log_formatter = ::Logger::Formatter.new
+  config.action_mailer.perform_deliveries = true
 
   Rails.application.config.middleware.use ExceptionNotification::Rack,
     :email => {
