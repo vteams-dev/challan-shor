@@ -2,7 +2,7 @@ module Api
   module V1
     class UserLocationsController < ApplicationController
 
-      api :POST, '/user_locations', 'Update user location'
+      api :POST, '/v1/user_locations', 'Update user location'
       param :latitude, Float, desc: 'User current location latitude', required: true
       param :longitude, Float, desc: 'User current location longitude', required: true
       param :user_id, Integer, desc: 'User id, whose current location is marked', required: true

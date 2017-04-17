@@ -2,7 +2,7 @@ module Api
   module V1
     class UsersController < ApplicationController
 
-      api :POST, '/users', 'Register User'
+      api :POST, '/v1/users', 'Register User'
       param :phone_number, String, desc: 'User phone number to register with', required: true
 
       def create
@@ -14,7 +14,7 @@ module Api
         end
       end
 
-      api :POST, '/users/verify', 'Verify user through pin code'
+      api :POST, '/v1/users/verify', 'Verify user through pin code'
       param :uuid, String, desc: 'User uuid sent in response to success registration', required: true
       param :pin, String, desc: 'User pin sent to user mobile while registration', required: true
 
@@ -31,7 +31,7 @@ module Api
         end
       end
 
-      api :POST, '/users/update', 'Update user settings'
+      api :POST, '/v1/users/update', 'Update user settings'
       param :f_name, String, desc: 'User first name'
       param :l_name, String, desc: 'User last name'
       param :email, String, desc: 'User email'
