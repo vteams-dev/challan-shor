@@ -9,8 +9,11 @@ class UserLocationsController < ApplicationController
         distance = @location.user.distance
       end
       @markups = MarkDanger.near([@location.latitude,@location.longitude],distance)
-      unless @markups.empty?
-        marker = @markups.first
+      all_markers = @markups
+      user_markers = MarkDanger.where(:user_id => @location.user.id)
+      other_markers = all_markers - user_markers
+      unless other_markers.empty?
+        marker = other_markers.first
         distance = marker.distance.round(3)
         mark_type = MarkDanger::MARK_TYPE[marker.mark_type]
         device_token = @location.user.device.device_token
@@ -19,9 +22,9 @@ class UserLocationsController < ApplicationController
         if (distance < 0.009)
           alert = "You are on #{mark_type} place."
         else
-          alert = "There is #{mark_type} about #{distance} miles away."
+          alert = "You are #{distance} miles away from #{mark_type}."
         end
-        if ((@location.user.allow_notifications?) and (marker.user_id != @location.user.id))
+        if @location.user.allow_notifications?
           if @location.user.device.device_type.eql?("android")
             fcm = FCM.new(ENV['FCM_API_KEY'])
             options={:notification => {:body => {:data=>"#{alert}"},:title => "#{mark_type} alert"}}
