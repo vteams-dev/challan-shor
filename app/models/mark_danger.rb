@@ -13,8 +13,7 @@
 
 class MarkDanger < ApplicationRecord
   belongs_to :user
-  # enum mark_type: {  'Camera'=>'1', 'Challan'=>'2', 'Naaka'=>'3', 'Accident'=>'4' }
-  MARK_TYPE = {1=>'Camera',2=>'Challan', 3=>'Naaka', 4=>'Accident'}
+  MARK_TYPE = {1=>'Camera',2=>'Challan', 3=>'Naaka', 4=>'Crime'}
 
   reverse_geocoded_by :latitude, :longitude
   # after_validation :reverse_geocode

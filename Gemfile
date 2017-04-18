@@ -15,8 +15,8 @@ gem 'geocoder'
 
 gem 'pushmeup'
 gem 'fcm'
-# gem 'rpush'
-# gem 'apipie-rails'
+
+gem 'exception_notification'
 
 group :development, :test do
   gem 'byebug', platform: :mri
@@ -28,7 +28,9 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
 
   gem 'pry-rails'
+  gem 'letter_opener'
   gem 'annotate'
+  gem 'apipie-rails'
 
   gem 'capistrano', '~> 3.4.0'
   gem 'capistrano-rails', '~> 1.1.2'
