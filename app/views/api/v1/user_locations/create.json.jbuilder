@@ -1,6 +1,7 @@
 if @markups
   json.success "true"
   json.message "Location Saved"
+  json.alert @alert
   json.data do
     json.markers @markups
   end
