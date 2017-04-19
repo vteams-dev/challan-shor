@@ -3,6 +3,7 @@ module Api
     module UserLocationsHelper
 
       def send_notification(markups)
+        @allow_notification = false
         all_markers = markups
         user_markers = MarkDanger.where(:user_id => @location.user.id)
         other_markers = all_markers - user_markers
@@ -18,7 +19,21 @@ module Api
           else
             alert = "You are #{distance} miles away from #{mark_type}."
           end
-          if @location.user.allow_notifications?
+          sent_notification = SentNotification.find_by_user_id(@location.user.id)
+          if sent_notification.nil?
+            sent_notification = SentNotification.new(user_id: @location.user.id, marker_id: marker.id)
+            sent_notification.save
+            @allow_notification = true
+          else
+            if (sent_notification.marker_id.eql? (marker.id))
+              @allow_notification = false
+            else
+              send_notification.marker_id = marker.id
+              send_notification.save
+              @allow_notification = true
+            end
+          end
+          if ((@location.user.allow_notifications?) and (@allow_notification))
             if @location.user.device.device_type.eql?("android")
               fcm = FCM.new(ENV['FCM_API_KEY'])
               options = {:data => {:body => "#{alert}", :title => "#{mark_type} alert"}}

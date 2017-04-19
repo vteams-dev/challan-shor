@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170412075925) do
+ActiveRecord::Schema.define(version: 20170419061824) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,13 @@ ActiveRecord::Schema.define(version: 20170412075925) do
     t.float    "longitude"
     t.integer  "user_id"
     t.integer  "mark_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "sent_notifications", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "marker_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
