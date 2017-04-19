@@ -25,7 +25,7 @@ module Api
             sent_notification.save
             @allow_notification = true
           else
-            if (sent_notification.marker_id.eql? (marker.id))
+            if (sent_notification.marker_id == marker.id)
               @allow_notification = false
             else
               send_notification.marker_id = marker.id
@@ -34,6 +34,7 @@ module Api
             end
           end
           if ((@location.user.allow_notifications?) and (@allow_notification))
+          if @location.user.allow_notifications?
             if @location.user.device.device_type.eql?("android")
               fcm = FCM.new(ENV['FCM_API_KEY'])
               options = {:data => {:body => "#{@alert}", :title => "#{mark_type} alert"}}
